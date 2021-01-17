@@ -14,5 +14,5 @@ includes:
 tasks:
   default:
     cmds:
-    - exit 0
+    - task -l
     silent: true
