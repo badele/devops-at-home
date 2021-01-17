@@ -1,0 +1,11 @@
+# Generated from ansible
+
+# Network
+interface eth0
+static ip_address={{ ansible_host }}
+static routers={{ network.gateway }}
+
+# Domain
+static domain_name={{ network.dns.search | join(' ') }}
+static domain_search={{ network.dns.search | join(' ') }}
+static domain_name_servers={{ network.dns.servers | join(' ') }}

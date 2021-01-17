@@ -1,0 +1,8 @@
+---
+
+packages:
+  install:
+  - curl
+  - neofetch
+  remove:
+  - cloud-init

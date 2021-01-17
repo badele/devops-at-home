@@ -55,19 +55,5 @@ A lot of inspiration for my cluster came from the people that have shared their 
 ### Available task commands
 This list commands generated with `task ci:doc-task`
 ```
-task: Available tasks for this project:
-* ansible:deps: 	Install Ansible Galaxy dependencies
-* ansible:ping: 	Ping nodes
-* ansible:play: 	Execute ansible playbook: Usage: [INVENTORY] [ARGS] <BOOK>
-* ci:doc-task: 		Include task command list into README.md
-* deps:all: 		Install all desktop dependencies
-* deps:archlinux: 	Install Archlinux desktop dependences
-* deps:direnv: 		Install direnv binary
-* deps:flash: 		Install hypriot flash binary
-* deps:gomplate: 	Install gomplate binary
-* deps:kubectl: 	Install kubectl client
-* deps:pre-commit: 	Install a precommit pip package
-* repo:init: 		Init secrets repo
-* repo:secret-show: 	Show base64 git-crypt secret
-* tool:flash: 		Flash RPI image into SD card
+{{ .Env.OUTPUT_TASKS }}
 ```

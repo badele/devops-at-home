@@ -1,0 +1,9 @@
+---
+version: '3'
+
+tasks:
+
+  doc-task:
+    desc: Include task command list into README.md
+    cmds:
+    - OUTPUT_TASKS=$(task) gomplate -f README.md.tpl -o README.md

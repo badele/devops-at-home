@@ -1,0 +1,6 @@
+---
+
+- hosts: all
+  roles:
+    - ../roles/os
+    - geerlingguy.ntp

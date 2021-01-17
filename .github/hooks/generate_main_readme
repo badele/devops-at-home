@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+OUTPUT_TASKS=$(.bin/task -l) gomplate -f README.md.tpl -o README.md
+exit 0

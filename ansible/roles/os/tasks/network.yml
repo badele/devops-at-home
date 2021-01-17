@@ -1,0 +1,27 @@
+---
+
+# Network
+- name: network | Set up network
+  become: true
+  template:
+    src: "{{ item.template }}"
+    dest: "{{ item.dest }}"
+    mode: 0644
+  with_items:
+  - { template: dhcpcd.j2, dest: /etc/dhcpcd.conf }
+  - { template: hosts.j2, dest: /etc/hosts }
+  notify:
+  - update hostname
+  - delete dhcp leases
+
+
+# Hostname
+- name: network | Update hostname
+  become: true
+  hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: network | set /etc/hostname
+  copy:
+    dest: /etc/hostname
+    content: "{{ inventory_hostname }}"

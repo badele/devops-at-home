@@ -1,0 +1,47 @@
+---
+version: '3'
+
+tasks:
+
+  init:
+    desc: Init secrets repo
+    deps:
+    - git-crypt-init
+    - secret-init
+    - pre-commit-init
+    - direnv
+
+  secret-show:
+    desc: Show base64 git-crypt secret
+    cmds:
+    - git-crypt export-key -- - | echo "Please store this password in safe place '$(base64 -w0)'"
+    silent: true
+
+  # Hidden tasks
+  git-crypt-init:
+    cmds:
+    - git-crypt init
+    - secret-init
+    silent: true
+    status:
+    - test -d .git/git-crypt
+
+  secret-init:
+    cmds:
+    - git-crypt export-key .git-crypt.secret
+    silent: true
+    status:
+    - test -f .git-crypt.secret
+
+  pre-commit-init:
+    cmds:
+    - pre-commit install
+    silent: true
+    status:
+    - test -e .git/hooks/pre-commit
+
+  direnv:
+    cmds:
+    - echo 'eval "$(direnv hook zsh)"' >> $HOME/.zshrc
+    status:
+    - grep "direnv hook zsh" $HOME/.zshrc > /dev/null

@@ -1,0 +1,6 @@
+---
+roles:
+- src: geerlingguy.ntp
+  version: 2.2.0
+- src: xanmanning.k3s
+  version: v2.4.2

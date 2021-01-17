@@ -1,0 +1,32 @@
+---
+##################
+# Somes commands
+#
+# task repo:pre-commit-init
+# pre-commit run --all-files
+
+fail_fast: false
+
+repos:
+- repo: local
+  hooks:
+  - id: doc-task
+    name: Generate task doc
+    entry: .github/hooks/generate_main_readme
+    language: script
+
+- repo: https://github.com/adrienverge/yamllint.git
+  rev: v1.25.0
+  hooks:
+  - id: yamllint
+    args:
+    - -c
+    - ".github/yamllint.yaml"
+
+# - repo: https://github.com/pre-commit/pre-commit-hooks
+#   rev: v3.4.0
+#   hooks:
+#   - id: trailing-whitespace
+#   - id: check-added-large-files
+#     args: [--maxkb=2048]
+#   - id: check-merge-conflict

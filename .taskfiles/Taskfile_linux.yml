@@ -1,0 +1,83 @@
+---
+version: '3'
+
+env:
+  URL_DIRENV: https://direnv.net/install.sh
+  URL_FLASH: https://github.com/hypriot/flash/releases/download/2.7.0/flash
+  URL_KUBECTL: https://storage.googleapis.com/kubernetes-release/release/v1.20.2/bin/linux/amd64/kubectl
+  URL_GOTEMPLATE: https://github.com/hairyhenderson/gomplate/releases/download/v3.8.0/gomplate_linux-amd64
+
+tasks:
+
+  all:
+    desc: Install all desktop dependencies
+    deps:
+    - archlinux
+    - direnv
+    - flash
+    - kubectl
+    - gomplate
+
+  archlinux:
+    desc: Install Archlinux desktop dependences
+    cmds:
+    - yaourt -qS wget git-crypt python docker
+
+    status:
+    - which wget
+    - which docker
+    - which git-crypt
+
+
+  pre-commit:
+    desc: Install a precommit pip package
+    cmds:
+    - pip install --user pre-commit
+    status:
+    - which pre-commit
+    deps:
+    - archlinux
+
+  direnv:
+    desc: Install direnv binary
+    cmds:
+    - wget -q "$URL_DIRENV" -O - | bin_path=.bin bash
+    status:
+    - test -e .bin/direnv
+    deps:
+    - archlinux
+
+  flash:
+    desc: Install hypriot flash binary
+    cmds:
+    - wget -q "$URL_FLASH" -O .bin/flash && chmod +x .bin/flash
+    status:
+    - test -e .bin/flash
+    deps:
+    - archlinux
+
+
+  kubectl:
+    desc: Install kubectl client
+    cmds:
+    - wget -q "$URL_KUBECTL" -O .bin/kubectl && chmod +x .bin/kubectl
+    status:
+    - test -e .bin/kubectl
+    deps:
+    - archlinux
+
+  gomplate:
+    desc: Install gomplate binary
+    cmds:
+    - wget -q "$URL_GOTEMPLATE" -O .bin/gomplate && chmod +x .bin/gomplate
+    status:
+    - test -e .bin/gomplate
+    deps:
+    - archlinux
+
+  clean:
+    cmds:
+    - rm -f ~/.local/bin/flash
+    - rm -f ~/.local/bin/direnv
+    - rm -f ~/.local/bin/kubectl
+    - rm -f ~/.local/bin/gomplate

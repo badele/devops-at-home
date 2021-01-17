@@ -1,0 +1,4 @@
+.git-crypt.secret
+.ansible
+.bin
+ansible/playbooks/debug.yml

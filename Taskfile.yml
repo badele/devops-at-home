@@ -1,0 +1,18 @@
+---
+version: '3'
+
+dotenv:
+- .vars.public
+
+includes:
+  deps: .taskfiles/Taskfile_{{OS}}.yml
+  repo: .taskfiles/Taskfile_repo.yml
+  ci: .taskfiles/Taskfile_ci.yml
+  tool: .taskfiles/Taskfile_tool.yml
+  ansible: .taskfiles/Taskfile_ansible.yml
+
+tasks:
+  default:
+    cmds:
+    - exit 0
+    silent: true

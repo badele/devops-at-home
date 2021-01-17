@@ -1,0 +1,23 @@
+---
+version: '3'
+
+tasks:
+
+  flash:
+    desc: Flash RPI image into SD card
+    cmds:
+    - echo sudo direnv exec . rpi_flash_k3s_node.sh {{.NAME}} {{.IPADDR}}
+    deps:
+    - check-name
+    - check-ipaddr
+
+  # Checks Parameters
+  check-name:
+    cmds:
+    - cmd: test ! -z "{{.NAME}}" || (echo "Please define NAME parameter"; exit 1)
+      silent: true
+
+  check-ipaddr:
+    cmds:
+    - cmd: test ! -z "{{.IPADDR}}" || (echo "Please define IPADDR parameter"; exit 1)
+      silent: true

@@ -1,0 +1,9 @@
+# Generated from ansible
+
+127.0.0.1 localhost {{ inventory_hostname }}
+
+# Ansible agent hosts
+{% for host in groups['all'] %}
+{{ hostvars[host].ansible_default_ipv4.address }}  {{ host }}
+
+{% endfor %}

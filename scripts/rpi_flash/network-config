@@ -1,0 +1,12 @@
+version: 2
+ethernets:
+  eth0:
+    addresses:
+      - ${IPADDR}
+    nameservers:
+      search: [${DNS_NAME}]
+      addresses: [${DNS_1},${DNS_2}]
+    routes:
+      - to: 0.0.0.0/0
+        via: ${GATEWAY}
+        metric: 3

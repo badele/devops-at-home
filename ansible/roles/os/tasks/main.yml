@@ -1,0 +1,13 @@
+---
+
+- include: network.yml
+  tags:
+  - host
+
+- include: packages.yml
+  tags:
+  - packages
+
+- include: user.yml
+  tags:
+  - user

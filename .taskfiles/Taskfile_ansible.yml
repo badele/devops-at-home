@@ -1,0 +1,32 @@
+---
+version: '3'
+
+env:
+
+vars:
+  INVENTORY: '{{ .INVENTORY | default "inventory/athome/hosts.yml" }}'
+  ARGS: '{{ .ARGS | default "" }}'
+
+tasks:
+  deps:
+    desc: Install Ansible Galaxy dependencies
+    cmds:
+    - ansible-galaxy install -r galaxy_requirements.yml
+
+  play:
+    desc: "Execute ansible playbook: Usage: [INVENTORY] [ARGS] <BOOK>"
+    cmds:
+    - ansible-playbook -i {{.INVENTORY}} {{.ARGS}} playbooks/{{.BOOK}}.yml
+    deps:
+    - check-book
+
+  ping:
+    desc: Ping nodes
+    cmds:
+    - ansible all -i {{.INVENTORY}} --one-line -m ping
+
+  # Checks Parameters
+  check-book:
+    cmds:
+    - cmd: test ! -z "{{.BOOK}}" || (echo "Please define BOOK parameter"; exit 1)
+      silent: true
