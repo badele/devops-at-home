@@ -77,7 +77,7 @@ tasks:
 
   clean:
     cmds:
-    - rm -f ~/.local/bin/flash
-    - rm -f ~/.local/bin/direnv
-    - rm -f ~/.local/bin/kubectl
-    - rm -f ~/.local/bin/gomplate
+    - rm -f .bin/flash
+    - rm -f .bin/direnv
+    - rm -f .bin/kubectl
+    - rm -f .bin/gomplate

@@ -11,7 +11,7 @@ tasks:
     - pre-commit-init
     - direnv
 
-  secret-show:
+  show-secret:
     desc: Show base64 git-crypt secret
     cmds:
     - git-crypt export-key -- - | echo "Please store this password in safe place '$(base64 -w0)'"
@@ -28,10 +28,10 @@ tasks:
 
   secret-init:
     cmds:
-    - git-crypt export-key .git-crypt.secret
+    - git-crypt export-key .local/git-crypt.secret
     silent: true
     status:
-    - test -f .git-crypt.secret
+    - test -f .local/git-crypt.secret
 
   pre-commit-init:
     cmds:

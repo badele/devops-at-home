@@ -4,29 +4,42 @@ version: '3'
 env:
 
 vars:
-  INVENTORY: '{{ .INVENTORY | default "inventory/athome/hosts.yml" }}'
   ARGS: '{{ .ARGS | default "" }}'
 
 tasks:
   deps:
     desc: Install Ansible Galaxy dependencies
     cmds:
-    - ansible-galaxy install -r galaxy_requirements.yml
+    - ansible-galaxy install -r ansible/galaxy_requirements.yml
+    - task: update-permissions
 
   play:
     desc: "Execute ansible playbook: Usage: [INVENTORY] [ARGS] <BOOK>"
     cmds:
-    - ansible-playbook -i {{.INVENTORY}} {{.ARGS}} playbooks/{{.BOOK}}.yml
+    - ansible-playbook {{.ARGS}} ansible/playbooks/{{.BOOK}}.yml
+    - task: update-permissions
     deps:
     - check-book
 
   ping:
     desc: Ping nodes
     cmds:
-    - ansible all -i {{.INVENTORY}} --one-line -m ping
+    - ansible all --one-line -m ping
+
+  update-permissions:
+    cmds:
+    - docker run --rm -it -v ${GIT_ROOT}:/app  alpine chown -R $(id -u):$(id -g) /app
+    deps:
+    - check-git-root
+    silent: true
 
   # Checks Parameters
   check-book:
     cmds:
     - cmd: test ! -z "{{.BOOK}}" || (echo "Please define BOOK parameter"; exit 1)
-      silent: true
+    silent: true
+
+  check-git-root:
+    cmds:
+    - cmd: test ! -z "$GIT_ROOT" || (echo "Please define GIT_ROOT (with direnv)"; exit 1)
+    silent: true

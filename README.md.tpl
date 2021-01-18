@@ -32,7 +32,7 @@ task tool:flash NAME=k3s-node2  IPADDR=${K3S3}
 ```
 # update hosts.yml & group_vars (on ansible/inventory/athome )
 task ansible:deps ansible:play BOOK=os
-task ansible:deps ansible:play BOOK=k3s ARGS="--check"
+task ansible:play BOOK=k3s
 ```
 
 ### Tools
