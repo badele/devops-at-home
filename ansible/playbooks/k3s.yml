@@ -3,3 +3,4 @@
 - hosts: k3scluster
   roles:
     - xanmanning.k3s
+    - ../roles/k3s

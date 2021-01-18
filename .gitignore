@@ -1,4 +1,4 @@
-.git-crypt.secret
+.local
 .ansible
 .bin
 ansible/playbooks/debug.yml

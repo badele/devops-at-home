@@ -68,6 +68,6 @@ task: Available tasks for this project:
 * deps:kubectl: 	Install kubectl client
 * deps:pre-commit: 	Install a precommit pip package
 * repo:init: 		Init secrets repo
-* repo:secret-show: 	Show base64 git-crypt secret
+* repo:show-secret: 	Show base64 git-crypt secret
 * tool:flash: 		Flash RPI image into SD card
 ```
