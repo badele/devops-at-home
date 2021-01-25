@@ -5,6 +5,7 @@
 MAINUSER="badele"
 SSH_PUB_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCx+wknx73mpym2T1SNjL7XgzkHQTGWpntd3dobXDuTK5sG+NJujicgwV0gZw5Yu92tsqf5A41yvZ3qFJTKtjY/6H8ALJT1cMfkm1tiOWrRsIpIwgXgdRb8wGIpTNJekqYWa8RK8pIkSMvZ1J5wbeGnayQwJaCb4aBRxlNcTqWpcToU75WwRFil9OxkqZT4E0ExsO9L5orvH5iEv9XVJ6Dz2OkDPiGoFHJmXQLp31TVyp1a1bCHnZ/QJoRLki1rQVUxCMD6COkN9ZsidXIPgJk7khVLkQ3WR6QdN0/x4J0a7PpEoG7krb/vql0NcDzSmt9h5vzg8midEhLTkh8UoMzj badele@dellxps"
 FLASH_DEVICE=mmcblk0
+RPI_FLASH="https://github.com/hypriot/image-builder-rpi/releases/download/v1.12.3/hypriotos-rpi-v1.12.3.img.zip"
 
 # Network
 DNS_NAME="lo"
@@ -16,3 +17,9 @@ GATEWAY=192.168.0.1
 K3S1="192.168.0.101"
 K3S2="192.168.0.102"
 K3S3="192.168.0.103"
+
+# Cluster
+GITHUB_USER=badele
+GITHUB_REPO=devops-at-home-k3s
+GITHUB_BRANCH=main
+GITHUB_PATH=cluster

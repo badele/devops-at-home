@@ -6,7 +6,7 @@ tasks:
   flash:
     desc: Flash RPI image into SD card
     cmds:
-    - echo sudo direnv exec . rpi_flash_k3s_node.sh {{.NAME}} {{.IPADDR}}
+    - direnv exec . scripts/rpi_flash/rpi_flash {{.NAME}} {{.IPADDR}}
     deps:
     - check-name
     - check-ipaddr

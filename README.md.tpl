@@ -30,9 +30,12 @@ task tool:flash NAME=k3s-node2  IPADDR=${K3S3}
 
 ## Install commons OS and K3S
 ```
-# update hosts.yml & group_vars (on ansible/inventory/athome )
-task ansible:deps ansible:play BOOK=os
-task ansible:play BOOK=k3s
+# before execute this script update your hosts.yml
+# and group_vars (on ansible/inventory/athome )
+# See more options in ansible folder
+task ansible:deploy:os # first run, reboot yes
+task ansible:deploy:k3s
+task cluster:deploy:flux
 ```
 
 ### Tools
@@ -48,7 +51,9 @@ task ansible:play BOOK=k3s
 
 A lot of inspiration for my cluster came from the people that have shared their clusters over at [awesome-home-kubernetes](https://github.com/k8s-at-home/awesome-home-kubernetes) and especially :
 
--  **onedr0p** => https://github.com/onedr0p/home-operations
+- [onedr0p](https://github.com/onedr0p/home-operations)
+- [blackjid](https://github.com/blackjid/k8s-gitops)
+- [zbigniewzolnierowicz](https://github.com/zbigniewzolnierowicz/k8s-home)
 
 ## Annex
 

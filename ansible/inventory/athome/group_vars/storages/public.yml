@@ -1,0 +1,17 @@
+---
+ansible_user: "root"
+
+info_system: Debian
+
+network_interface: enp2s0
+
+packages:
+  install:
+  - curl
+  - sudo
+  - lvm2
+  - neofetch
+  - nfs-common
+  - btrfs-progs
+  remove:
+  - cloud-init

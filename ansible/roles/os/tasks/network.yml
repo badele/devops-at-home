@@ -8,12 +8,10 @@
     dest: "{{ item.dest }}"
     mode: 0644
   with_items:
-  - { template: dhcpcd.j2, dest: /etc/dhcpcd.conf }
+  - { template: interfaces.j2, dest: /etc/network/interfaces.d/ethernet }
   - { template: hosts.j2, dest: /etc/hosts }
   notify:
-  - update hostname
   - delete dhcp leases
-
 
 # Hostname
 - name: network | Update hostname
@@ -22,6 +20,9 @@
     name: "{{ inventory_hostname }}"
 
 - name: network | set /etc/hostname
+  become: true
   copy:
     dest: /etc/hostname
     content: "{{ inventory_hostname }}"
+  notify:
+  - update hostname

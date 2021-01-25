@@ -14,6 +14,6 @@ users:
     groups: users,docker,adm,dialout,audio,plugdev,netdev,video
 #    ssh-import-id: None
     lock_passwd: false
-    plain_text_passwd: '${USERPASSWORD}'
+    plain_text_passwd: '${MAINUSERPASS}'
     ssh-authorized-keys:
       - '${SSH_PUB_KEY}'

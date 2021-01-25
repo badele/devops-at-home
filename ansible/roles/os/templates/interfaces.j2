@@ -1,0 +1,12 @@
+# Generated from ansible
+
+auto lo
+iface lo inet loopback
+
+auto {{network_interface}}
+iface {{network_interface}} inet static
+    address {{ansible_host}}/24
+    dns-search {{ network_dns_search | join(' ') }}
+    dns-nameservers {{ network_dns_servers | join(' ') }}
+    post-up route add default gw {{ network_gateway }} || true
+    pre-down route del default gw {{ network_gateway }} || true

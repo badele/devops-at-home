@@ -6,6 +6,8 @@ env:
   URL_FLASH: https://github.com/hypriot/flash/releases/download/2.7.0/flash
   URL_KUBECTL: https://storage.googleapis.com/kubernetes-release/release/v1.20.2/bin/linux/amd64/kubectl
   URL_GOTEMPLATE: https://github.com/hairyhenderson/gomplate/releases/download/v3.8.0/gomplate_linux-amd64
+  URL_HELM: https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+  URL_FLUX: https://toolkit.fluxcd.io/install.sh
 
 tasks:
 
@@ -16,6 +18,8 @@ tasks:
     - direnv
     - flash
     - kubectl
+    - helm
+    - flux
     - gomplate
 
   archlinux:
@@ -38,6 +42,7 @@ tasks:
     deps:
     - archlinux
 
+
   direnv:
     desc: Install direnv binary
     cmds:
@@ -46,6 +51,7 @@ tasks:
     - test -e .bin/direnv
     deps:
     - archlinux
+
 
   flash:
     desc: Install hypriot flash binary
@@ -65,6 +71,27 @@ tasks:
     - test -e .bin/kubectl
     deps:
     - archlinux
+
+
+  helm:
+    desc: Install helm client
+    cmds:
+    - wget -q -O - "$URL_HELM" | USE_SUDO=false HELM_INSTALL_DIR=.bin bash
+    status:
+    - test -e .bin/helm
+    deps:
+    - archlinux
+
+
+  flux:
+    desc: Install flux client
+    cmds:
+    - wget -q -O - "$URL_FLUX" | bash -s ${GIT_ROOT}/.bin
+    status:
+    - test -e .bin/flux
+    deps:
+    - archlinux
+
 
   gomplate:
     desc: Install gomplate binary

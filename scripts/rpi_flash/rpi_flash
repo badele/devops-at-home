@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-SCRIPT=$(basename $0)
-
 if [ -z $2 ]; then
   echo "Usage: $SCRIPT <node-name> <node-ip>"
   exit 1
@@ -11,8 +9,8 @@ NAME=$1
 IPADDR=$2
 
 # Create dynamicaly file
-NAME=$NAME IPADDR="${IPADDR}/24" envsubst < ${SCRIPTSDIR}/rpi_flash/user-data > /tmp/user-data
-NAME=$NAME IPADDR="${IPADDR}/24" envsubst < ${SCRIPTSDIR}/rpi_flash/network-config > /tmp/network-config
+NAME=$NAME IPADDR="${IPADDR}/24" envsubst < ${GIT_ROOT}/scripts/rpi_flash/user-data > /tmp/user-data
+NAME=$NAME IPADDR="${IPADDR}/24" envsubst < ${GIT_ROOT}/scripts/rpi_flash/network-config > /tmp/network-config
 
 # Flash on SD card
-echo sudo flash -d /dev/${FLASH_DEVICE} -u /tmp/user-data -F /tmp/network-config ${URL_FLASH}
+sudo flash -d /dev/${FLASH_DEVICE} -u /tmp/user-data -F /tmp/network-config ${RPI_FLASH}

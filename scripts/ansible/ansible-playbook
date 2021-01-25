@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-docker run -it --rm -v ${GIT_ROOT}:/app -w /app/ -v $HOME/.ssh:/root/.ssh:ro -v ${GIT_ROOT}/.ansible:/root/.ansible pad92/ansible-alpine:latest ansible-playbook $*

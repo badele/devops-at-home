@@ -4,6 +4,6 @@
 
 # Ansible agent hosts
 {% for host in groups['all'] %}
-{{ hostvars[host].ansible_default_ipv4.address }}  {{ host }}
+{{ hostvars[host].ansible_host }}  {{ host }}
 
 {% endfor %}

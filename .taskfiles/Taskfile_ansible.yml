@@ -11,27 +11,32 @@ tasks:
     desc: Install Ansible Galaxy dependencies
     cmds:
     - ansible-galaxy install -r ansible/galaxy_requirements.yml
-    - task: update-permissions
 
   play:
-    desc: "Execute ansible playbook: Usage: [INVENTORY] [ARGS] <BOOK>"
+    desc: "Execute ansible playbook: Usage: [ARGS] <BOOK>"
     cmds:
     - ansible-playbook {{.ARGS}} ansible/playbooks/{{.BOOK}}.yml
-    - task: update-permissions
     deps:
     - check-book
+
+  deploy:os:
+    desc: Play os playbook
+    cmds:
+    - task ansible:play BOOK=os
+    deps:
+    - deps
+
+  deploy:k3s:
+    desc: Play k3s playbook
+    cmds:
+    - task ansible:play BOOK=k3s
+    deps:
+    - deps
 
   ping:
     desc: Ping nodes
     cmds:
     - ansible all --one-line -m ping
-
-  update-permissions:
-    cmds:
-    - docker run --rm -it -v ${GIT_ROOT}:/app  alpine chown -R $(id -u):$(id -g) /app
-    deps:
-    - check-git-root
-    silent: true
 
   # Checks Parameters
   check-book:

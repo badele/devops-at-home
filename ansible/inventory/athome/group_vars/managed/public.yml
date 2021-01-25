@@ -4,6 +4,11 @@
 ansible_user: "badele"
 ansible_ssh_common_args: "-o UserKnownHostsFile=/dev/null"
 ansible_python_interpreter: /usr/bin/python3
+git_root: "{{ lookup('pipe', 'git rev-parse --show-toplevel') }}"
+
+# Commands
+kubectl: '{{git_root}}/.bin/kubectl'
+
 
 # Time
 ntp_enabled: true
@@ -15,11 +20,8 @@ ntp_area: 'fr'
 ssh_authorized_keys:
   - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCx+wknx73mpym2T1SNjL7XgzkHQTGWpntd3dobXDuTK5sG+NJujicgwV0gZw5Yu92tsqf5A41yvZ3qFJTKtjY/6H8ALJT1cMfkm1tiOWrRsIpIwgXgdRb8wGIpTNJekqYWa8RK8pIkSMvZ1J5wbeGnayQwJaCb4aBRxlNcTqWpcToU75WwRFil9OxkqZT4E0ExsO9L5orvH5iEv9XVJ6Dz2OkDPiGoFHJmXQLp31TVyp1a1bCHnZ/QJoRLki1rQVUxCMD6COkN9ZsidXIPgJk7khVLkQ3WR6QdN0/x4J0a7PpEoG7krb/vql0NcDzSmt9h5vzg8midEhLTkh8UoMzj badele@dellxps"
 
-network:
-  gateway: 192.168.0.1
-  dns:
-    search:
-      - lo
-    servers:
-      - 89.2.0.1
-      - 89.2.0.1
+# Commons network configuration
+network_interface: eth0
+network_gateway: 192.168.0.1
+network_dns_search: [lo]
+network_dns_servers: [ 89.2.0.1, 89.2.0.1 ]

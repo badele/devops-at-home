@@ -1,0 +1,17 @@
+---
+version: '3'
+
+env:
+tasks:
+
+  deploy:flux:
+    desc: deploy flux manifest
+    cmds:
+      - flux check --pre
+      - |
+        flux bootstrap github --verbose \
+        --owner=${GITHUB_USER} \
+        --repository=${GITHUB_REPO} \
+        --branch=${GITHUB_BRANCH} \
+        --path=${GITHUB_PATH} \
+        --personal

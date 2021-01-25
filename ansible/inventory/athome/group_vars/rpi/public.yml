@@ -1,8 +1,11 @@
 ---
 
+info_system: Hypriot
+
 packages:
   install:
   - curl
   - neofetch
+  - nfs-common
   remove:
   - cloud-init

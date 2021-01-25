@@ -7,9 +7,10 @@ dotenv:
 includes:
   deps: .taskfiles/Taskfile_{{OS}}.yml
   repo: .taskfiles/Taskfile_repo.yml
+  ansible: .taskfiles/Taskfile_ansible.yml
+  cluster: .taskfiles/Taskfile_cluster.yml
   ci: .taskfiles/Taskfile_ci.yml
   tool: .taskfiles/Taskfile_tool.yml
-  ansible: .taskfiles/Taskfile_ansible.yml
 
 tasks:
   default:

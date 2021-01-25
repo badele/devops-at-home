@@ -1,5 +1,7 @@
 ---
 
+ansible_python_interpreter: /usr/bin/python3
+
 k3s_release_version: "v1.20.2+k3s1"
 k3s_become_for_all: true
 
